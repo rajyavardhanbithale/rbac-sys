@@ -6,6 +6,8 @@ import { getUserProfile } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
-router.get("/profile", authenticate, authorize(ROLESENUM), getUserProfile);
+const availableRoles = [ROLESENUM.ADMIN, ROLESENUM.USER, ROLESENUM.MODERATOR]; 
+
+router.get("/profile", authenticate, authorize(availableRoles), getUserProfile);
 
 export default router;

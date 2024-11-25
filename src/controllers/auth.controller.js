@@ -1,7 +1,7 @@
 
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
 export const register = async (req, res) => {
     try {
@@ -11,7 +11,7 @@ export const register = async (req, res) => {
             return res.status(400).json({ message: "please fill in all fields" });
         }
 
-        const user = new userModel({ name, email, password, role });
+        const user = new User({ name, email, password, role });
         await user.save();
         res.status(201).json({ message: "user registered successfully" });
     } catch (err) {

@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-export const ROLESENUM = ["user", "admin"];
+export const ROLESENUM = {
+    ADMIN: 'admin',
+    USER: 'user',
+    MODERATOR: 'moderator',
+};
 
 const userSchema = new mongoose.Schema({
     name: {

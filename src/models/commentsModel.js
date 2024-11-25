@@ -10,11 +10,14 @@ const commentSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    postID: {
+    postId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
         required: true
     }
+}, {
+    versionKey: false,
+    timestamps: true
 });
 
-const Comment = mongoose.model('Comment', commentSchema);
+export const Comment = mongoose.model('Comment', commentSchema);

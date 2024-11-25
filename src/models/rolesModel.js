@@ -9,7 +9,8 @@ export const ROLES_WITH_PERMISSIONS = {
 
 const roleSchema = new mongoose.Schema({
     _id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     role: {
@@ -20,12 +21,12 @@ const roleSchema = new mongoose.Schema({
     permissions: {
         type: [String],
         required: true,
-    }
-},{
+    },
+}, {
     versionKey: false,
 });
 
-roleSchema.pre('save', function(next) {
+roleSchema.pre('save', function (next) {
     if (!this.permissions || this.permissions.length === 0) {
         this.permissions = ROLES_WITH_PERMISSIONS[this.role];
     }

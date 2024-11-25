@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import User, { ROLES } from "../models/userModel.js";
+import { User, ROLES } from "../models/userModel.js";
 import { cookiesOption } from "../utils/cookiesOption.js";
 import Role, { ROLES_WITH_PERMISSIONS } from "../models/rolesModel.js";
 

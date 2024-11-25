@@ -1,4 +1,5 @@
-import Post from "../models/postsModel.js";
+import { Post } from "../models/postsModel.js";
+
 
 export const createPosts = async (req, res) => {
     try {
@@ -25,11 +26,23 @@ export const createPosts = async (req, res) => {
 
 export const getPost = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id).populate('authorID', 'name email');
+        const post = await Post.findById(req.params.id)
+            .populate('authorID', 'name email')
+
+        post.comments = undefined;
         if (!post) {
             return res.status(404).json({ message: "Post not found" });
         }
         res.status(200).json(post);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+}
+
+export const getAllPost = async (req, res) => {
+    try {
+        const posts = await Post.find().populate('authorID', 'name email');
+        res.status(200).json(posts);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

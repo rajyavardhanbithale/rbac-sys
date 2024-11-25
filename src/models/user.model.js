@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-export const ROLESENUM = {
+export const ROLES = {
     ADMIN: 'admin',
     USER: 'user',
     MODERATOR: 'moderator',
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ROLESENUM,
+        enum: ROLES,
         default: "user"
     },
 });

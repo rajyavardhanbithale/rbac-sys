@@ -1,7 +1,6 @@
-
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import User, { ROLESENUM } from "../models/user.model.js";
+import User, { ROLES } from "../models/user.model.js";
 import { cookiesOption } from "../utils/cookiesOption.js";
 
 export const register = async (req, res) => {
@@ -12,7 +11,7 @@ export const register = async (req, res) => {
             return res.status(400).json({ message: "please fill in all fields" });
         }
 
-        const user = new User({ name, email, password, role: ROLESENUM.USER });
+        const user = new User({ name, email, password, role: ROLES.USER });
         await user.save();
         res.status(201).json({ message: "user registered successfully" });
     } catch (err) {
@@ -59,11 +58,11 @@ export const login = async (req, res) => {
 
 
 export const getUserProfile = async (req, res) => {
-
     const { id } = req.user;
 
     try {
         const user = await User.findById(id);
+        user.password = undefined;
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }

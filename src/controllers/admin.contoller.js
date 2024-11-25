@@ -73,7 +73,7 @@ export const changeUserRole = async (req, res) => {
     const { id } = req.params;
     const { role } = req.body;
 
-    if (![ROLESENUM.ADMIN, ROLESENUM.USER, ROLESENUM.MODERATOR].includes(role)) {
+    if (![ROLES.ADMIN, ROLES.USER, ROLES.MODERATOR].includes(role)) {
         return res.status(400).json({ message: 'invalid role' });
     }
     try {

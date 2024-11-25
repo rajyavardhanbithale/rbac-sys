@@ -1,6 +1,6 @@
 import express from 'express';
 import authenticate from '../middleware/auth.middleware.js';
-import { ROLESENUM } from '../models/user.model.js';
+import { ROLES } from '../models/user.model.js';
 import authorize from '../middleware/authorize.middleware.js';
 import {
   createUser,
@@ -17,42 +17,42 @@ const router = express.Router();
 router.post(
   '/users',
   authenticate,
-  authorize([ROLESENUM.ADMIN]),
+  authorize([ROLES.ADMIN]),
   createUser
 );
 
 router.get(
   '/users',
   authenticate,
-  authorize([ROLESENUM.ADMIN]),
+  authorize([ROLES.ADMIN]),
   getUsers
 );
 
 router.get(
   '/users/:id',
   authenticate,
-  authorize([ROLESENUM.ADMIN]),
+  authorize([ROLES.ADMIN]),
   getUserById
 );
 
 router.put(
   '/users/:id',
   authenticate,
-  authorize([ROLESENUM.ADMIN]),
+  authorize([ROLES.ADMIN]),
   updateUser
 );
 
 router.delete(
   '/users/:id',
   authenticate,
-  authorize([ROLESENUM.ADMIN]),
+  authorize([ROLES.ADMIN]),
   deleteUser
 );
 
 router.put(
   '/users/:id/role',
   authenticate,
-  authorize([ROLESENUM.ADMIN]),
+  authorize([ROLES.ADMIN]),
   changeUserRole
 );
 

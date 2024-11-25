@@ -9,14 +9,19 @@ const authenticate = (req, res, next) => {
 
     const token = authHeader.split(' ')[1];
 
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(401).json({ message: 'Invalid or expired token' });
-        }
+    jwt.verify(
+        token,
+        process.env.JWT_SECRET,
+        { algorithms: ['HS256'] },
+        (err, decoded) => {
+            if (err) {
+                return res.status(401).json({ message: 'Invalid or expired token' });
+            }
 
-        req.user = decoded;
-        next();
-    });
+            req.user = decoded;
+            next();
+        }
+    );
 };
 
 export default authenticate;

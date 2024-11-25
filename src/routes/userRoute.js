@@ -1,8 +1,8 @@
 import express from "express";
-import { ROLES } from "../models/user.model.js";
-import authenticate from "../middleware/authenticate.js";
-import authorize from "../middleware/authorize.js";
-import { getUserProfile } from "../controllers/auth.controller.js";
+import { ROLES } from "../models/userModel.js";
+import authenticate from "../middleware/authMiddleware.js";
+import authorize from "../middleware/authorizeMiddleware.js";
+import { getUserProfile } from "../controllers/authContorller.js";
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ROLES } from "./user.model.js";
+import { ROLES } from "./userModel.js";
 
 export const ROLES_WITH_PERMISSIONS = {
     [ROLES.ADMIN]: ["modify_user", "modify_moderator", "modify_admin", "modify_post"],

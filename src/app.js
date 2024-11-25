@@ -4,8 +4,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
 
-import authRoutes from "./routes/auth.route.js";
-import userRoutes from "./routes/user.route.js";
+
+import authRoutes from "./routes/authRoute.js";
+import userRoutes from "./routes/userRoute.js";
 
 dotenv.config();
 

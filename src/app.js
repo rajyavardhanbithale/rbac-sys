@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
-
+import cors from "cors";
 
 import authRoutes from "./routes/authRoute.js";
 import userRoutes from "./routes/userRoute.js";
@@ -13,6 +13,24 @@ import adminRoutes from "./routes/adminRoute.js";
 dotenv.config();
 
 const app = express();
+
+// cors
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
+
+app.use(cors(
+    {
+        origin: "http://localhost:3001",
+        credentials: true,
+    }
+));
 
 // Middleware
 app.use(express.json());

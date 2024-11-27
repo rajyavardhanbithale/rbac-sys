@@ -58,7 +58,7 @@ export const login = async (req, res) => {
         const accessToken = jwt.sign({ id: user._id, role: role.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
         const refreshToken = generateRefreshToken(user);
 
-        res.cookie("refreshToken", refreshToken, cookiesOption);
+        res.cookie("token", refreshToken, cookiesOption);
 
         res.status(200).json({
             message: "Login successful",

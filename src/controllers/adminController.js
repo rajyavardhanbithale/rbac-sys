@@ -1,7 +1,6 @@
 import { ROLES, User } from '../models/userModel.js';
 import Role from '../models/rolesModel.js';
 
-
 export const getUsers = async (req, res) => {
     try {
         const users = await Role.find().populate('_id', 'name email');
@@ -43,3 +42,4 @@ export const changeUserRole = async (req, res) => {
         res.status(500).json({ message: 'error changing user role', error });
     }
 };
+

@@ -4,6 +4,10 @@ import { User, ROLES } from "../models/userModel.js";
 import { cookiesOption } from "../utils/cookiesOption.js";
 import Role, { ROLES_WITH_PERMISSIONS } from "../models/rolesModel.js";
 
+const generateRefreshToken = (user) => {
+    return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" }); // Refresh token lasts 7 days
+};
+
 export const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -37,13 +41,13 @@ export const login = async (req, res) => {
 
         const user = await User.findOne({ email });
 
-        if(!user) {
+        if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
         const role = await Role.findById(user._id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
+        if (!role) {
+            return res.status(404).json({ message: "Role not found" });
         }
 
         const validPassword = await bcrypt.compare(password, user.password);
@@ -51,9 +55,10 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ id: user._id, role: role.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const accessToken = jwt.sign({ id: user._id, role: role.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+        const refreshToken = generateRefreshToken(user);
 
-        res.cookie("token", token, { cookiesOption });
+        res.cookie("refreshToken", refreshToken, cookiesOption);
 
         res.status(200).json({
             message: "Login successful",
@@ -61,14 +66,47 @@ export const login = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
+                role: role.role,
             },
-            token: token
+            token: accessToken, 
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 };
+
+export const refreshToken = async (req, res) => {
+    try {
+        const { refreshToken } = req.cookies;
+
+        if (!refreshToken) {
+            return res.status(403).json({ message: "No refresh token provided" });
+        }
+
+        jwt.verify(refreshToken, process.env.JWT_SECRET, async (err, decoded) => {
+            if (err) {
+                return res.status(403).json({ message: "Invalid refresh token" });
+            }
+
+            const user = await User.findById(decoded.id);
+            const role = await Role.findById(user._id);
+
+            if (!user || !role) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            const newAccessToken = jwt.sign({ id: user._id, role: role.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+            res.status(200).json({
+                message: "New access token generated",
+                token: newAccessToken,
+            });
+        });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
 
 
 export const getUserProfile = async (req, res) => {

@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoute.js";
 import userRoutes from "./routes/userRoute.js";
 import postsRoutes from "./routes/postsRoute.js";
 import adminRoutes from "./routes/adminRoute.js";
+import dashboardRoutes from "./routes/dashboardRoute.js";
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ app.use((req, res, next) => {
 
 app.use(cors(
     {
-        origin: "http://localhost:3001",
+        origin: "http://localhost:3000",
         credentials: true,
     }
 ));
@@ -40,6 +41,7 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/posts", postsRoutes);
 

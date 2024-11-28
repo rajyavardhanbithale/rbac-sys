@@ -1,5 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
 import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
@@ -15,7 +14,7 @@ dotenv.config();
 
 const app = express();
 
-// cors
+
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -26,6 +25,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// cors
 app.use(cors(
     {
         origin: "http://localhost:3000",
@@ -33,12 +33,12 @@ app.use(cors(
     }
 ));
 
-// Middleware
+// middleware
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
 
-// Routes
+// routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/dashboard", dashboardRoutes);

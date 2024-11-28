@@ -51,7 +51,7 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const accessToken = generateJWT(user._id, role.role, "1h");
+        const accessToken = generateJWT(user._id, role.role, "3h");
         const refreshToken = generateJWT(user._id, role.role, "7d");
 
         res.cookie("token", accessToken, cookiesOption);
@@ -85,22 +85,28 @@ export const refreshToken = async (req, res) => {
                 return res.status(403).json({ message: "Invalid refresh token" });
             }
 
+            if (!decoded.id) {
+                return res.status(403).json({ message: "Invalid refresh token" });
+            }
+
+
             const user = await User.findById(decoded.id);
+
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
             const role = await Role.findById(user._id);
 
             if (!user || !role) {
                 return res.status(404).json({ message: "User not found" });
             }
 
-            const newAccessToken = generateJWT(user._id, role.role, "1h");
+            const newAccessToken = generateJWT(user._id, role.role, "3h");
             const newRefreshToken = generateJWT(user._id, role.role, "7d");
 
             res.cookie("token", newAccessToken, cookiesOption);
             res.cookie("refreshToken", newRefreshToken, refreshTokenOption);
-
-            console.log('New access token:', newAccessToken);
-console.log('New refresh token:', newRefreshToken);
-console.log('Setting cookies');
 
             res.status(200).json({
                 message: "New access token generated",
@@ -112,6 +118,15 @@ console.log('Setting cookies');
     }
 };
 
+export const logout = async (req, res) => {
+    try {
+        res.clearCookie("token");
+        res.clearCookie("refreshToken");
+        res.status(200).json({ message: "Logout successful" });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
 
 export const getUserProfile = async (req, res) => {

@@ -27,10 +27,10 @@ app.use((req, res, next) => {
 
 // cors
 app.use(cors(
-    {
-        origin: "http://localhost:3000",
-        credentials: true,
-    }
+  {
+    origin: "http://localhost:3000",
+    credentials: true,
+  }
 ));
 
 // middleware
@@ -39,10 +39,22 @@ app.use(helmet());
 app.use(morgan("dev"));
 
 // routes
+app.get("/", (req, res) => {
+  res.json({
+    message: "API is running",
+    status: 200,
+    repo: "https://github.com/rajyavardhanbithale/rbac-sys"
+  });
+})
+
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/posts", postsRoutes);
+
+app.catchAll = (req, res) => {
+  res.status(404).json({ message: "Route not found" });
+}
 
 export default app;

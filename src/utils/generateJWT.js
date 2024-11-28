@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 export const cookiesOption = {
     httpOnly: false,
-    secure: false,
+    secure: process.env.NODE_ENV === "production" ? true : false,
     sameSite: "lax",
     algorithm: "HS256",
     maxAge: 1 * 24 * 60 * 60 * 1000,

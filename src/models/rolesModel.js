@@ -3,8 +3,8 @@ import { ROLES } from "./userModel.js";
 
 export const ROLES_WITH_PERMISSIONS = {
     [ROLES.ADMIN]: ["modify_user", "modify_moderator", "modify_admin", "modify_post"],
-    [ROLES.USER]: ["create_comment", "modify_post"],
-    [ROLES.MODERATOR]: ["modify_comments", "delete_comments", "modify_post"],
+    [ROLES.USER]: ["create_comment", "create_post"],
+    [ROLES.MODERATOR]: ["modify_comments", "modify_post"],
 };
 
 const roleSchema = new mongoose.Schema({

@@ -63,7 +63,8 @@ export const removeComment = async (req, res) => {
         }
 
         const updatePost = await Post.findByIdAndUpdate(post._id, { $pull: { comments: comment._id } });
-        await Promise.all([comment.delete(), updatePost.save()]);
+
+        await Comment.deleteOne({ _id: comment._id });
 
         res.status(200).json({ message: 'Comment deleted successfully' });
     }

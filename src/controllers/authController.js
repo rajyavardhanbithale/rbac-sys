@@ -1,12 +1,8 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User, ROLES } from "../models/userModel.js";
-import { cookiesOption } from "../utils/cookiesOption.js";
 import Role, { ROLES_WITH_PERMISSIONS } from "../models/rolesModel.js";
-
-const generateRefreshToken = (user) => {
-    return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" }); // Refresh token lasts 7 days
-};
+import { cookiesOption, generateJWT, refreshTokenOption } from "../utils/generateJWT.js";
 
 export const register = async (req, res) => {
     try {
@@ -55,10 +51,11 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        const accessToken = jwt.sign({ id: user._id, role: role.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
-        const refreshToken = generateRefreshToken(user);
+        const accessToken = generateJWT(user._id, role.role, "1h");
+        const refreshToken = generateJWT(user._id, role.role, "7d");
 
-        res.cookie("token", refreshToken, cookiesOption);
+        res.cookie("token", accessToken, cookiesOption);
+        res.cookie("refreshToken", refreshToken, refreshTokenOption);
 
         res.status(200).json({
             message: "Login successful",
@@ -68,7 +65,7 @@ export const login = async (req, res) => {
                 email: user.email,
                 role: role.role,
             },
-            token: accessToken, 
+            token: accessToken,
         });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -77,7 +74,7 @@ export const login = async (req, res) => {
 
 export const refreshToken = async (req, res) => {
     try {
-        const { refreshToken } = req.cookies;
+        const { refreshToken } = req.body;
 
         if (!refreshToken) {
             return res.status(403).json({ message: "No refresh token provided" });
@@ -95,7 +92,15 @@ export const refreshToken = async (req, res) => {
                 return res.status(404).json({ message: "User not found" });
             }
 
-            const newAccessToken = jwt.sign({ id: user._id, role: role.role }, process.env.JWT_SECRET, { expiresIn: "1h" });
+            const newAccessToken = generateJWT(user._id, role.role, "1h");
+            const newRefreshToken = generateJWT(user._id, role.role, "7d");
+
+            res.cookie("token", newAccessToken, cookiesOption);
+            res.cookie("refreshToken", newRefreshToken, refreshTokenOption);
+
+            console.log('New access token:', newAccessToken);
+console.log('New refresh token:', newRefreshToken);
+console.log('Setting cookies');
 
             res.status(200).json({
                 message: "New access token generated",

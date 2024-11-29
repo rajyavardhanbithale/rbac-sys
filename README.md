@@ -1,7 +1,7 @@
 # Role-Based Access Control (RBAC) System
 
 ## Overview
-This project is an implementation of **Authentication**, **Authorization**, and **Role-Based Access Control (RBAC)**, designed to fulfill the requirements of the VRV Security Backend Developer Intern assignment. The system enables secure user registration, login, and access control based on roles such as Admin, User, and Moderator.
+This project is an implementation of **Authentication**, **Authorization**, and **Role-Based Access Control (RBAC)**. The system enables secure user registration, login, and access control based on roles such as Admin, User, and Moderator.
 
 ## Note
 Because the frontend and backend are hosted on completely different domains, cookies may not work as expected due to cross-origin restrictions. To access the full functionality, either avoid refreshing the page after login or run the application locally with both frontend and backend on the same domain.

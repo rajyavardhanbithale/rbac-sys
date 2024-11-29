@@ -72,6 +72,10 @@ Because the frontend and backend are hosted on completely different domains, coo
 - **Role Access Check**: The authorize middleware checks if the user’s role is authorized to access the requested route.
 - **Access Granted/Denied**: If the user’s role is authorized, the request proceeds. If the role is not authorized, a 403 Forbidden response is sent.
   
+## Deployment
+Backend - https://rbac-sys.onrender.com \
+Frontend - https://rbac-vrv-sys.vercel.app
+
 
 ### Postman Collection - [view](https://github.com/rajyavardhanbithale/rbac-sys/blob/main/RBAC.postman_collection.json)
 

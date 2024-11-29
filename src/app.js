@@ -17,7 +17,7 @@ const app = express();
 
 // cors
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://rbac-vrv-sys.vercel.app/"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 }));

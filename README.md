@@ -6,6 +6,11 @@ This project is an implementation of **Authentication**, **Authorization**, and 
 ## Note
 Because the frontend and backend are hosted on completely different domains, cookies may not work as expected due to cross-origin restrictions. To access the full functionality, either avoid refreshing the page after login or run the application locally with both frontend and backend on the same domain.
 
+### Credentials for admin access
+Email: john@example.com\
+Password: securepassword123
+
+
 ## Implementations
 1. **Authentication**:
    - Secure user registration and login.

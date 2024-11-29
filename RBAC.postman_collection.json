@@ -1,0 +1,511 @@
+{
+	"info": {
+		"_postman_id": "d4fe15da-d8ac-4394-ad25-a58ae3957b88",
+		"name": "RBAC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21845158"
+	},
+	"item": [
+		{
+			"name": "POSTS",
+			"item": [
+				{
+					"name": "ADD POST",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhhYjc2MzA5NzEzNTE1M2MzNzlmYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyODE1NzM3LCJleHAiOjE3MzI4MTkzMzd9.5LceUnhgiE_R-3_wDPIZXw5YdpymiYWAsFRerjvG9Ok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"title\": \"The Importance of Financial Literacy\",\n    \"content\": \"Financial literacy is crucial for making informed decisions about money management, savings, and investments. Understanding concepts like budgeting, debt, and credit can help you build a solid financial future.\"\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL POSTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET POSTS BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts/6745cc25d4167996e1911f79",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts",
+								"6745cc25d4167996e1911f79"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE POSTS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDQ3NDAxYWE1OWE2M2YyODJlOTQ3MSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyNTU0OTAwLCJleHAiOjE3MzI1NTg1MDB9.huN1gewMaJio5xhiIzJBG2M2ADm8TgA0W4dWiHYZ-xI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts/6744b27296a952d808682a70",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts",
+								"6744b27296a952d808682a70"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "COMMENTS",
+			"item": [
+				{
+					"name": "ADD COMMENTS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhhYjc2MzA5NzEzNTE1M2MzNzlmYyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyODE1NzM3LCJleHAiOjE3MzI4MTkzMzd9.5LceUnhgiE_R-3_wDPIZXw5YdpymiYWAsFRerjvG9Ok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"postId\": \"6748ab163097135153c379c8\", \n  \"content\": \"Keep It Up !!\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts/comments/",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts",
+								"comments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET COMMENTS BY POSTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts/comments/6745cc25d4167996e1911f79",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts",
+								"comments",
+								"6745cc25d4167996e1911f79"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE COMMENTS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDQ3NDAxYWE1OWE2M2YyODJlOTQ3MSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyNTU0OTAwLCJleHAiOjE3MzI1NTg1MDB9.huN1gewMaJio5xhiIzJBG2M2ADm8TgA0W4dWiHYZ-xI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts/comments/6744b421d8a3c34db85bb2fe",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts",
+								"comments",
+								"6744b421d8a3c34db85bb2fe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ADMIN",
+			"item": [
+				{
+					"name": "GET ALL USER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhhNWZjYjM2YzMxNDAwNzYwYmZjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMjgxNDQwNywiZXhwIjoxNzMyODE4MDA3fQ.ZGZbgeu87kidqQRgV8eEioKJoJw-XZ_5ep6h5YrngMc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"postId\": \"6744b411d8a3c34db85bb2f9\", \n  \"content\": \"This is a sample comment on the post!\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/admin/users",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MODIFY ROLE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDRiYThlNmQxN2RkMWY0M2Y4YWE4MyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMjU1ODA3OCwiZXhwIjoxNzMyNTYxNjc4fQ.S106ku8v-wWFo9EaPzlDZargkd_VHLm8ZfdQ3jYAcyE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role\": \"user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/admin/users/6744ba8e6d17dd1f43f8aa83",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"6744ba8e6d17dd1f43f8aa83"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDQ3NDAxYWE1OWE2M2YyODJlOTQ3MSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyNTU0OTAwLCJleHAiOjE3MzI1NTg1MDB9.huN1gewMaJio5xhiIzJBG2M2ADm8TgA0W4dWiHYZ-xI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_ENDPOINT}}/posts/comments/6744b421d8a3c34db85bb2fe",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"posts",
+								"comments",
+								"6744b421d8a3c34db85bb2fe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "REGISTER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"securepassword123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/auth/register",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"securepassword123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/auth/login",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REFRESH TOKEN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"refreshToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhhNWZjYjM2YzMxNDAwNzYwYmZjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczMjgxNDQwNywiZXhwIjoxNzMyODE4MDA3fQ.ZGZbgeu87kidqQRgV8eEioKJoJw-XZ_5ep6h5YrngMc\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_ENDPOINT}}/auth/refresh-token",
+							"host": [
+								"{{API_ENDPOINT}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROFILE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhhNWZjYjM2YzMxNDAwNzYwYmZjNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyODE0MzQ0LCJleHAiOjE3MzI4MTc5NDR9.98MPmUU9PNCrUEQqYwEHOwhnA9oepnTPzBc8UQDJfac",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_ENDPOINT}}/user/profile",
+					"host": [
+						"{{API_ENDPOINT}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DASHBOARD",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NDhhNWZjYjM2YzMxNDAwNzYwYmZjNCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzMyODE0MzQ0LCJleHAiOjE3MzI4MTc5NDR9.98MPmUU9PNCrUEQqYwEHOwhnA9oepnTPzBc8UQDJfac",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_ENDPOINT}}/dashboard",
+					"host": [
+						"{{API_ENDPOINT}}"
+					],
+					"path": [
+						"dashboard"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_ENDPOINT",
+			"value": "https://rbac-sys.onrender.com//api",
+			"type": "string"
+		}
+	]
+}
